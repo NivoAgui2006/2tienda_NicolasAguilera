@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi tienda</title>
+  <style>
+    /* ================================
+       ESTILO GENERAL
+    ================================ */
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0d0d0d;
+      color: #ffffff;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+
+    /* ================================
+       ENCABEZADO
+    ================================ */
+
+    h1 {
+      margin: 0;
+      padding: 45px 20px 5px;
+
+      background: #0d0d0d;
+      color: #ffffff;
+
+      font-size: 48px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+
+      text-shadow: 4px 4px 0 #b6ff00;
+    }
+
+    .slogan {
+      margin: 0;
+      padding: 5px 20px 40px;
+
+      background: #0d0d0d;
+      color: #b6ff00;
+
+      font-size: 20px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+
+    /* ================================
+       BENEFICIOS
+    ================================ */
+
+    .beneficios {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+
+      background: #b6ff00;
+      color: #0d0d0d;
+
+      padding: 17px;
+      margin-bottom: 40px;
+
+      font-weight: 900;
+      text-transform: uppercase;
+
+      box-shadow: 0 5px 0 #ffffff;
+    }
+
+    .beneficios span {
+      font-size: 13px;
+      padding: 8px 15px;
+    }
+
+
+    /* ================================
+       CATÁLOGO
+    ================================ */
+
+    #productos {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      gap: 28px;
+
+      padding: 20px 30px;
+    }
+
+
+    /* ================================
+       PRODUCTOS
+    ================================ */
+
+    .producto {
+      position: relative;
+
+      background: #181818;
+
+      border: 2px solid #292929;
+
+      border-radius: 18px;
+
+      padding: 15px;
+
+      width: 240px;
+
+      box-shadow: 0 10px 0 #000000;
+
+      transition: all 0.3s ease;
+
+      overflow: hidden;
+    }
+
+
+    /* Línea de color superior */
+
+    .producto::before {
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 5px;
+
+      background: #b6ff00;
+    }
+
+
+    /* Efecto al pasar el mouse */
+
+    .producto:hover {
+      transform: translateY(-12px) rotate(-1deg);
+
+      border-color: #b6ff00;
+
+      box-shadow:
+        0 18px 0 #b6ff00,
+        0 20px 35px rgba(182, 255, 0, 0.25);
+    }
+
+
+    /* ================================
+       IMAGEN DEL ZAPATO
+    ================================ */
+
+    .producto img {
+      width: 100%;
+      height: 180px;
+
+      object-fit: cover;
+
+      border-radius: 12px;
+
+      transition: transform 0.4s ease;
+    }
+
+    .producto:hover img {
+      transform: scale(1.08) rotate(2deg);
+    }
+
+
+    /* ================================
+       NOMBRE
+    ================================ */
+
+    .producto h3 {
+      margin: 16px 0 8px;
+
+      font-size: 20px;
+
+      color: #ffffff;
+
+      text-transform: uppercase;
+    }
+
+
+    /* ================================
+       DESCRIPCIÓN
+    ================================ */
+
+    .descripcion {
+      font-size: 14px;
+
+      color: #a5a5a5;
+
+      min-height: 42px;
+
+      line-height: 1.5;
+    }
+
+
+    /* ================================
+       PRECIO
+    ================================ */
+
+    .precio {
+      font-size: 23px;
+
+      font-weight: 900;
+
+      color: #b6ff00;
+
+      margin: 15px 0;
+    }
+
+
+    /* ================================
+       BOTÓN COMPRAR
+    ================================ */
+
+    .producto button {
+      background: #b6ff00;
+
+      border: none;
+
+      color: #0d0d0d;
+
+      padding: 12px 20px;
+
+      margin-top: 5px;
+
+      border-radius: 30px;
+
+      cursor: pointer;
+
+      font-weight: 900;
+
+      text-transform: uppercase;
+
+      transition: all 0.25s ease;
+    }
+
+    .producto button:hover {
+      background: #ffffff;
+
+      transform: scale(1.08);
+    }
+
+
+    /* ================================
+       CARRITO
+    ================================ */
+
+    .carrito {
+      margin-top: 60px;
+      margin-bottom: 40px;
+
+      padding: 30px;
+
+      background: #181818;
+
+      border: 2px solid #b6ff00;
+
+      border-radius: 20px;
+
+      text-align: left;
+
+      display: inline-block;
+
+      min-width: 340px;
+
+      box-shadow:
+        0 0 30px rgba(182, 255, 0, 0.15);
+    }
+
+    .carrito h2 {
+      margin-top: 0;
+
+      color: #b6ff00;
+
+      text-align: center;
+
+      text-transform: uppercase;
+
+      letter-spacing: 2px;
+    }
+
+
+    /* ================================
+       LISTA CARRITO
+    ================================ */
+
+    #lista-carrito {
+      padding-left: 20px;
+    }
+
+    #lista-carrito li {
+      margin-bottom: 10px;
+
+      color: #dddddd;
+    }
+
+
+    /* ================================
+       RESUMEN
+    ================================ */
+
+    .resumen {
+      border-top: 1px solid #444;
+
+      margin-top: 18px;
+
+      padding-top: 15px;
+    }
+
+    .total {
+      font-size: 23px;
+
+      font-weight: 900;
+
+      color: #b6ff00;
+    }
+
+
+    /* ================================
+       BOTÓN VACIAR
+    ================================ */
+
+    .vaciar {
+      background: #ff304f;
+
+      border: none;
+
+      color: white;
+
+      padding: 11px 17px;
+
+      margin-top: 10px;
+
+      border-radius: 30px;
+
+      cursor: pointer;
+
+      font-weight: bold;
+
+      transition: 0.2s;
+    }
+
+    .vaciar:hover {
+      background: #ff637a;
+
+      transform: scale(1.05);
+    }
+
+
+    /* ================================
+       BOTÓN FINALIZAR
+    ================================ */
+
+    .finalizar {
+      background: #b6ff00;
+
+      border: none;
+
+      color: #0d0d0d;
+
+      padding: 11px 18px;
+
+      margin-top: 10px;
+
+      margin-left: 5px;
+
+      border-radius: 30px;
+
+      cursor: pointer;
+
+      font-weight: 900;
+
+      transition: 0.2s;
+    }
+
+    .finalizar:hover {
+      background: #ffffff;
+
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <h1> 👟Ecommerce Nike Shoes 👟</h1>
+
+  <p class="slogan">
+    Deja huella con cada paso
+  </p>
+
+  <div class="beneficios">
+    <span>🚚 Envíos en Bogotá</span>
+    <span>🔒 Compra segura</span>
+    <span>📦 Seguimiento de pedido</span>
+  </div>
+
+  <div id="productos"></div>
+
+  <div class="carrito">
+    <h2>🧾 Carrito de Compras</h2>
+
+    <ul id="lista-carrito"></ul>
+
+    <div class="resumen">
+      <p>
+        Envío: <strong>Gratis</strong>
+      </p>
+
+      <p class="total">
+        Total: $<span id="total">0</span>
+      </p>
+    </div>
+
+    <button class="vaciar" onclick="vaciarCarrito()">
+      🧼 Vaciar Carrito
+    </button>
+
+    <button class="finalizar" onclick="finalizarCompra()">
+      ✅ Finalizar Compra
+    </button>
+  </div>
+
+  <script>
+    const productos = [
+      {
+        id: 1,
+        nombre: "Nike P-6000",
+        descripcion: "Inspirados en los 2000, con un look deportivo y atrevido.",
+        precio: 450000,
+        imagen: "https://nikeco.vtexassets.com/arquivos/ids/1112706-800-auto?v=639215346980430000&width=800&height=auto&aspect=true"
+      },
+      {
+        id: 2,
+        nombre: "Nike Dunk Low",
+        descripcion: "Diseño urbano, cómodo y versátil para destacar en cada paso.",
+        precio: 380000,
+        imagen: "https://static.nike.com/a/images/t_web_pdp_936_v2/f_auto,u_9ddf04c7-2a9a-4d76-add1-d15af8f0263d,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/1cba7da6-d5ea-4cf5-868f-c0cc693bd1fc/NIKE+DUNK+LOW+%28GS%29.png"
+      },
+      {
+        id: 3,
+        nombre: "Nike V2K",
+        descripcion: "Estética Y2K y actitud futurista para un look que destaca.",
+        precio: 300000,
+        imagen: "https://nikeco.vtexassets.com/arquivos/ids/1112568-800-auto?v=639214787582830000&width=800&height=auto&aspect=true"
+      },
+      {
+        id: 4,
+        nombre: "Nike V5",
+        descripcion: "Inspirado en el running clásico, con un diseño retro y deportivo.",
+        precio: 480000,
+        imagen: "https://nikeco.vtexassets.com/arquivos/ids/1086144-800-auto?v=639187067865970000&width=800&height=auto&aspect=true"
+      },
+      {
+        id: 5,
+        nombre: "Nike Air Max 97",
+        descripcion: "Diseño icónico con ondas marcadas y un estilo que nunca pasa de moda.",
+        precio: 560000,
+        imagen: "https://www.nike.sa/dw/image/v2/BDVB_PRD/on/demandware.static/-/Sites-akeneo-master-catalog/default/dw2f981b96/nk/9a9/1/3/1/1/2/9a913112_6c85_42bf_84a2_7a5198f4a0e0.jpg?sw=700&sh=700&sm=fit&q=100&strip=false"
+      }
+    ];
+
+
+    /* ==============================
+       CARRITO
+    ================================ */
+
+    const carrito = [];
+
+    const contenedorProductos = document.getElementById("productos");
+    const listaCarrito = document.getElementById("lista-carrito");
+    const totalCarrito = document.getElementById("total");
+
+
+    /* ==============================
+       MOSTRAR PRODUCTOS
+    ================================ */
+
+    function mostrarProductos() {
+
+      contenedorProductos.innerHTML = "";
+
+      productos.forEach(prod => {
+
+        const div = document.createElement("div");
+
+        div.className = "producto";
+
+        div.innerHTML = `
+          <img src="${prod.imagen}" alt="${prod.nombre}">
+
+          <h3>${prod.nombre}</h3>
+
+          <p class="descripcion">
+            ${prod.descripcion}
+          </p>
+
+          <p class="precio">
+            ${prod.precio.toLocaleString("es-CO", {
+              style: "currency",
+              currency: "COP",
+              minimumFractionDigits: 0
+            })}
+          </p>
+
+          <button onclick="agregarAlCarrito(${prod.id})">
+            Agregar al carrito
+          </button>
+        `;
+
+        contenedorProductos.appendChild(div);
+
+      });
+
+    }
+
+
+    /* ==============================
+       AGREGAR AL CARRITO
+    ================================ */
+
+    function agregarAlCarrito(id) {
+
+      const productoExistente =
+        carrito.find(p => p.id === id);
+
+      if (productoExistente) {
+
+        productoExistente.cantidad++;
+
+      } else {
+
+        const producto =
+          productos.find(p => p.id === id);
+
+        carrito.push({
+          ...producto,
+          cantidad: 1
+        });
+
+      }
+
+      actualizarCarrito();
+
+    }
+
+
+    /* ==============================
+       ACTUALIZAR CARRITO
+    ================================ */
+
+    function actualizarCarrito() {
+
+      listaCarrito.innerHTML = "";
+
+      let total = 0;
+      let totalItems = 0;
+
+      carrito.forEach(item => {
+
+        const li =
+          document.createElement("li");
+
+        const subtotal =
+          item.precio * item.cantidad;
+
+        li.textContent =
+          `${item.nombre} x${item.cantidad} — ` +
+          subtotal.toLocaleString("es-CO", {
+            style: "currency",
+            currency: "COP",
+            minimumFractionDigits: 0
+          });
+
+        listaCarrito.appendChild(li);
+
+        total += subtotal;
+        totalItems += item.cantidad;
+
+      });
+
+      totalCarrito.textContent =
+        total.toLocaleString("es-CO");
+
+      actualizarTituloCarrito(totalItems);
+
+    }
+
+
+    /* ==============================
+       CONTADOR DEL CARRITO
+    ================================ */
+
+    function actualizarTituloCarrito(cantidad) {
+
+      const titulo =
+        document.querySelector(".carrito h2");
+
+      titulo.textContent =
+        `🧾 Carrito de Compras (${cantidad})`;
+
+    }
+
+
+    /* ==============================
+       VACIAR CARRITO
+    ================================ */
+
+    function vaciarCarrito() {
+
+      if (carrito.length === 0) {
+
+        alert("🛒 El carrito ya está vacío.");
+
+        return;
+
+      }
+
+      if (
+        confirm(
+          "¿Estás seguro de que quieres vaciar el carrito?"
+        )
+      ) {
+
+        carrito.length = 0;
+
+        actualizarCarrito();
+
+      }
+
+    }
+
+
+    /* ==============================
+       FINALIZAR COMPRA
+    ================================ */
+
+    function finalizarCompra() {
+
+      if (carrito.length === 0) {
+
+        alert(
+          "🛒 Tu carrito está vacío. Agrega productos antes de finalizar la compra."
+        );
+
+        return;
+
+      }
+
+      alert(
+        "🎉 ¡Pedido simulado confirmado!\n\n" +
+        "En un eCommerce real, ahora entrarían en acción " +
+        "el backend, la pasarela de pago y la logística."
+      );
+
+      carrito.length = 0;
+
+      actualizarCarrito();
+
+    }
+
+
+    /* ==============================
+       INICIAR TIENDA
+    ================================ */
+
+    mostrarProductos();
+  </script>
+</body>
+</html>
